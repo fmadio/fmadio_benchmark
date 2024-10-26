@@ -158,7 +158,7 @@ int main(int argc, char* argv[])
 	CycleCalibration();
 
 	int ThreadCnt 	= 16;				// number of threads
-	int FileMax		= 100e3;			// total number of files
+	int FileMax		= 1e6;				// total number of files
 	int FileSize	= 1024*1024;		// size of each file
 
 	sem_init(&s_Sync, 0, ThreadCnt);
@@ -210,7 +210,7 @@ int main(int argc, char* argv[])
 		float fps = dFile / dT;
 		
 		printf("FileCnt: %8i (%8.3f) %8.3f GB %8.3f Gbps %8.3fK FilesPerSec\n", TotalFile, 
-																			TotalFile/(float)(ThreadCnt * FileMax), 
+																			TotalFile/(float)FileMax, 
 																			TotalByte/1e9, 
 																			bps / 1e9, 
 																			fps/1000.0);
