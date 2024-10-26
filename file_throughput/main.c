@@ -157,9 +157,9 @@ int main(int argc, char* argv[])
 {
 	CycleCalibration();
 
-	int ThreadCnt 	= 16;
-	int FileMax		= 20e3;
-	int FileSize	= 1024*1024;
+	int ThreadCnt 	= 16;				// number of threads
+	int FileMax		= 100e3;			// total number of files
+	int FileSize	= 1024*1024;		// size of each file
 
 	sem_init(&s_Sync, 0, ThreadCnt);
 
@@ -169,7 +169,7 @@ int main(int argc, char* argv[])
 	{
 		Thread_t* T = &ThreadList[t];
 		T->Instance = t;
-		T->FileCnt 	= FileMax;
+		T->FileCnt 	= FileMax/ThreadCnt;
 		T->FileSize = FileSize; 
 		T->IsDone   = false; 
 		pthread_create(&T->Thread, NULL, &SingleCPUTest, T);
